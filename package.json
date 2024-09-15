@@ -1,0 +1,30 @@
+{
+  "name": "botintranetcicpc",
+  "version": "1.0.0",
+  "description": "Bot de Telegram en NodeJs para Gestión de Solicitudes en Intranet del CICPC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2-runtime pm2.ecosystem.config.js",
+    "bot": "nodemon src/bot/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rafalejandrorh/BotIntranetCICPC.git"
+  },
+  "author": "Rafael Rivero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafalejandrorh/BotIntranetCICPC/issues"
+  },
+  "homepage": "https://github.com/rafalejandrorh/BotIntranetCICPC#readme",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "telegraf": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
