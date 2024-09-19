@@ -49,5 +49,10 @@ module.exports = {
         timezone: /^[A-Za-z]+\/[A-Za-z]+$/,
         email: /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$/,
         phone: /^\+\d{1,3}\d{3,14}$/,
-    }
+    },
+    securityQuestions: [
+        '¿Cuál es el nombre de tu primera mascota?',
+        '¿Cuál es tu comida favorita?',
+        '¿En qué ciudad naciste?'
+    ]
 };
