@@ -9,7 +9,7 @@ ARG NODE_VERSION=20.9.0
 FROM node:${NODE_VERSION}-alpine
 
 WORKDIR /usr/src/app
-COPY package.json /usr/src/app
+COPY ../package.json /usr/src/app
 
 RUN npm install pm2 -g
 RUN npm install
