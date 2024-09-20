@@ -17,13 +17,12 @@ securityQuestionScene.on('text', (context) => {
         credential: context.session.credential,
         securityAnswer: context.session.securityAnswer
     };
-    context.reply('Registro completado. Acceso concedido.');
     context.scene.leave();
 
     
     // Aquí puedes agregar la lógica para validar el acceso
     if (context.session.id === '27903883' && context.session.credential === '53592' && context.session.securityAnswer === 'respuesta_correcta') {
-        context.reply('Acceso concedido.');
+        context.reply('Registro completado. Acceso concedido.');
     } else {
         context.reply('Acceso denegado.');
     }
