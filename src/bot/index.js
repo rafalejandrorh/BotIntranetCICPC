@@ -1,9 +1,25 @@
 const { Telegraf, Scenes, session } = require('telegraf');
 const { Stage } = Scenes;
 const { telegram: { bot: { token } } } = require('../../config');
+
+// const cronJobs = require('./cronJobs');
+// const auth = require('./middlewares/auth.handler');
+// const isBot = require('./middlewares/isBot.handler');
+
+// Constants
+const { 
+    telegram: { bot: { replySettingsDefault } },
+    regExp: { email: regExpEmail, phone: regExpPhone },
+    securityQuestions
+} = require('../../config');
+const { userData, userAttempts } = require('../bot/utils/userData');
+
+// Middlewares
+const { logError: logErrorMiddleware } = require('../bot/middlewares/error.handler');
+
 // Commands
-const register = require('./commands/registerCommand');
-const recoveryPassword = require('./commands/recoveryPasswordCommand');
+const registerCommand = require('./commands/registerCommand');
+const recoveryPasswordCommand = require('./commands/recoveryPasswordCommand');
 
 // Escenes
 const idScene = require('./scenes/idScene');
@@ -16,12 +32,22 @@ const bot = new Telegraf(token);
 bot.use(session());
 
 // Crear stage y registrar escenas
-const stage = new Stage([idScene, credentialScene, securityQuestionScene]);
+const stage = new Stage([idScene(), credentialScene, securityQuestionScene]);
 bot.use(stage.middleware());
+
+// El Comando Start debe mostrar los comandos disponibles en el BOT
+// start(bot);
+
 // Comando para registrarse en el Bot
-register(bot, stage);
+const register = registerCommand({userData, logErrorMiddleware});
+register(bot, stage, replySettingsDefault);
 
 // Comando para Desbloqueo de Usuario a través de pregunta de seguridad
-recoveryPassword(bot);
+const recoveryPassword = recoveryPasswordCommand({securityQuestions, userData, userAttempts, logErrorMiddleware});
+recoveryPassword(bot, replySettingsDefault);
+
+// CronJobs
+// cronJobs(bot);
+
 // Launch Bot
 bot.launch();
